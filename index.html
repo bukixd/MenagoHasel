@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MenagoHasel</title>
+</head>
+<body>
+    <h1>MenagoLoginu i Haslo</h1>
+    <div id="hasloList"></div>
+
+    <h2>Dodaj nowe hasla</h2>
+    <input type="text" name="" id="haslo">
+    <button onclick="addHaslo()">Dodaj</button>
+    <script>
+        
+        function addHaslo() {
+            let haslo = document.getElementById('haslo').value;
+            let hasloList = JSON.parse(window.localStorage.getItem('hasloList'));
+            if (hasloList === null) hasloList = Array();
+            hasloList.push(haslo);
+            window.localStorage.setItem('hasloList', JSON.stringify(hasloList));
+            document.getElementById('haslo').value = "";
+            showHasloList();
+        }
+        function showHasloList() {
+            let hasloArray = JSON.parse(window.localStorage.getItem('hasloList'));
+            if(hasloArray === null) return;
+            let hasloList = document.getElementById('hasloList');
+            let htmlBuffer = "";
+            htmlBuffer += "<ul>";
+                for (let i = 0; i < hasloArray.length; i++) {
+                    htmlBuffer += "<li><button onclick=\"removeHaslo("+i+")\">Usun</button>" + hasloArray[i] + "</li>";
+                }
+                htmlBuffer += "</ul>";
+                hasloList.innerHTML = htmlBuffer;
+        }
+        function removeHaslo(i) {
+            let hasloArray = JSON.parse(window.localStorage.getItem('hasloList'));
+            hasloArray.splice(i, 1);
+            window.localStorage.setItem('hasloList', JSON.stringify(hasloArray));
+            showHasloList();
+        }
+    </script>
+    
+</body>
+</html>
