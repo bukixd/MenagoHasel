@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pl">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MenagoHasel</title>
 </head>
-<body>  
+<body onload="init()">  
     <h1>MenagoLoginu i Haslo</h1>
 
     <h2>Dodaj nowy login i haslo</h2>
@@ -15,15 +15,19 @@
     <div id="hasloList"></div>
     <button onclick="addHaslo()">Dodaj</button>
     <script>
-
-        window.setTimeout('', 5000);
         var password = prompt("Wprowadz haslo");
+
         if (password=="jd")
         alert('Prawidlowe haslo');
         else {
-            window.location="http://www.wp.pl/";
+            alert('Niepoprawne haslo');
+            window.location.reload();
         }
-        wait for 
+        function init() {
+            showHasloList();
+            window.setTimeout(function(){
+                window.location.reload();
+            }, 5000);
 
 
         
@@ -58,7 +62,8 @@
             window.localStorage.setItem('hasloList', JSON.stringify(hasloArray));
             showHasloList();
         }
+    }
     </script>
-    
+
 </body>
 </html>
